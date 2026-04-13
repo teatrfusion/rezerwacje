@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Kalendarz Teatr Fusion</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f4f4;
+}
+
+header{
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:15px;
+    font-size:22px;
+}
+
+#calendar-container{
+    padding:10px;
+}
+
+iframe{
+    width:100%;
+    height:85vh;
+    border:0;
+}
+
+#legend{
+    background:white;
+    padding:15px;
+    border-top:1px solid #ddd;
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    justify-content:center;
+}
+
+.legend-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:15px;
+}
+
+.color-box{
+    width:14px;
+    height:14px;
+    border-radius:3px;
+}
+</style>
+</head>
+
+<body>
+
+<header>Kalendarz Teatr Fusion</header>
+
+<div id="calendar-container">
+<iframe id="calendarFrame"></iframe>
+</div>
+
+<div id="legend">
+
+  <div class="legend-group">
+    <div class="legend-title">Parter:</div>
+
+    <label class="legend-item">
+      <input type="checkbox" checked data-src="teatrfusion@gmail.com" data-color="%231B4F72">
+      <div class="color-box" style="background:#1B4F72"></div>
+      02 Teatr Fusion
+    </label>
+
+    <label class="legend-item">
+      <input type="checkbox" checked data-src="6ea52cadbbadcd7c89875a4ba5db55f0e93f641bd36b3bbe847b29ed9d3a2691@group.calendar.google.com" data-color="%235DADE2">
+      <div class="color-box" style="background:#5DADE2"></div>
+      03 Chill Room
+    </label>
+  </div>
+
+  <div class="legend-group">
+    <div class="legend-title">I piętro:</div>
+
+    <label class="legend-item">
+      <input type="checkbox" checked data-src="51b0d6fccb341b2c64f2b7b051250c3e2b4845f627ddbf0c890b73efdab95788@group.calendar.google.com" data-color="%23EC7063">
+      <div class="color-box" style="background:#EC7063"></div>
+      16 Lecture
+    </label>
+
+    <label class="legend-item">
+      <input type="checkbox" checked data-src="48c6b68fb4e8f813fe61484eb2759e073410b059cc33c8ac07e5e06409170dbf@group.calendar.google.com" data-color="%23922B21">
+      <div class="color-box" style="background:#922B21"></div>
+      17 IT Classroom
+    </label>
+  </div>
+
+  <div class="legend-group">
+    <div class="legend-title">II piętro:</div>
+
+    <label class="legend-item">
+      <input type="checkbox" checked data-src="fa3faa565744f22cbb9b8e53bb3cb4452e624c114bf47606cb53e48743574cbe@group.calendar.google.com" data-color="%231E8449">
+      <div class="color-box" style="background:#1E8449"></div>
+      26 Parliamentary
+    </label>
+
+    <label class="legend-item">
+      <input type="checkbox" checked data-src="5bd6a227cf8dd5ec7fbe732dae661381169ee375f70598096d89d528940b53e5@group.calendar.google.com" data-color="%2358D68D">
+      <div class="color-box" style="background:#58D68D"></div>
+      27 Infinity
+    </label>
+  </div>
+
+</div>
+
+<script>
+
+function updateCalendar(){
+
+let base="https://calendar.google.com/calendar/embed?wkst=2&ctz=Europe%2FWarsaw&mode=AGENDA";
+let params="";
+
+document.querySelectorAll("#legend input:checked").forEach(cb=>{
+params += "&src="+encodeURIComponent(cb.dataset.src);
+params += "&color="+cb.dataset.color;
+});
+
+document.getElementById("calendarFrame").src = base + params;
+
+}
+
+document.querySelectorAll("#legend input").forEach(cb=>{
+cb.addEventListener("change", updateCalendar);
+});
+
+updateCalendar();
+
+</script>
+
+</body>
+</html>
